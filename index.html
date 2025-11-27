@@ -5,27 +5,225 @@
   <link rel="stylesheet" href="tutorial.css" />
 </head>
 <body>
-  <header>
-    <h1>Pranati Pradhan</h1>
-    <p>Unity Developer & Programmer</p>
-  </header>
+<div class="container">
+    <button id="themeBtn">Switch Mode</button>
+</div>
 
-  <section id="about">
-    <h2>About Me</h2>
-    <img src="Hello kitty.jpeg" alt="Hello kitty's photo" width="200" />
-    <p>I am currently studying in BIC, 2nd year. I love building immersive game environments and solving practical programming challenges.</p>
-  </section>
+<header>
+  <h1>Pranati Pradhan</h1>
+  <p>Unity Developer & Programmer</p>
+</header>
 
-  <section id="projects">
-    <h2>Projects</h2>
-    <div class="project">
-      <h3>Gate Control System</h3>
-      <p>Unity script using Box Collider and MonoBehaviour to control gate animations.</p>
+<section id="about">
+  <h2>About Me</h2>
+  <img src="Hello kitty.jpeg" alt="Hello kitty's photo" width="200" />
+  <p>I am currently studying in BIC, 2nd year. I love building immersive game environments and solving practical programming challenges. I'm always curious and enjoy learning new things that help me grow everyday. I'm also exploring the world of 3D simulation where I can create tiny magical spaces from my imagination.</p>
+</section>
+
+<section id="projects">
+  <h2>Projects</h2>
+
+  <div class="projects-container">
+
+    <div class="project" data-link="https://pradhanpranati64-hue.github.io/demo-repo/">
+      <h3>Portfolio Website</h3>
+      <p>Responsive portfolio built with HTML, CSS, and JavaScript.</p>
     </div>
-    <div class="project">
-      <h3>Crime scene Simulation</h3>
-      <p>AudioSource-based siren effect with interactive triggers,fr.</p>
+
+  </div>
+</section>
+
+
+<section id="skills">
+  <h2>Skills</h2>
+  <div class="skill">
+    <p>Unity Simulation</p>
+    <div class="progress-bar">
+      <div class="progress" data-progress="85"></div>
     </div>
-  </section>
+  </div>
+  <div class="skill">
+    <p>Crocheting</p>
+    <div class="progress-bar">
+      <div class="progress" data-progress="70"></div>
+    </div>
+  </div>
+  <div class="skill">
+    <p>JavaScript</p>
+    <div class="progress-bar">
+      <div class="progress" data-progress="60"></div>
+    </div>
+  </div>
+</section>
+
+<h2>Video</h2>
+<video controls width="300" height="300" poster="crochetfool.jpg">
+  <source src="flower.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+<h2>Audio</h2>
+  <audio controls>
+    <source src="purring-cat-401727.mp3" type="audio/mp3">
+    Your browser does not support the audio tag.
+  </audio>
+
+<section id="image-slider">
+  <h2>Image Slider</h2>
+  <div class="slider">
+    <div class="slides">
+      <img src="Biratnagar-International-College.png" alt="Image 1">
+      <img src="infrastructure__banner.jpg" alt="Image 2">
+      <img src="aaa-image.png" alt="Image 3">
+      <img src="learning-zone.png" alt="Image 4">
+    </div>
+  
+    <button class="prev">&#10094;</button>
+    <button class="next">&#10095;</button>
+  </div>
+</section>
+
+  <script>
+  
+  const slides = document.querySelector(".slides");
+  const images = document.querySelectorAll(".slides img");
+  const prevBtn = document.querySelector(".prev");
+  const nextBtn = document.querySelector(".next");
+
+  let index = 0;
+
+  function showSlide(i) {
+    if (i < 0) {
+      index = images.length - 1;
+    } else if (i >= images.length) {
+      index = 0;
+    } else {
+      index = i;
+    }
+    slides.style.transform = `translateX(${-index * 100}%)`;
+  }
+
+  prevBtn.addEventListener("click", () => {
+    showSlide(index - 1);
+  });
+
+  nextBtn.addEventListener("click", () => {
+    showSlide(index + 1);
+  });
+
+  setInterval(() => {
+    showSlide(index + 1);
+  }, 5000);
+</script>
+</body>
+</html>
+
+<div class="section">
+  <h2>Contact</h2>
+  <form id="contactForm">
+    <div id="messageBox"></div>
+    <input type="text" id="name" placeholder="Your Name" required />
+    <input type="email" id="email" placeholder="Your Email" required />
+    <textarea id="message" placeholder="Your Message" rows="5" required></textarea>
+    <button type="submit">Submit</button>
+  </form>
+</div>
+
+<button class="signup-btn" id="signupBtn">Up</button>
+
+<script>
+ 
+  const signupBtn = document.getElementById("signupBtn");
+  signupBtn.addEventListener("click", () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  });
+
+  const body = document.body;
+  const btn = document.getElementById("themeBtn");
+  let savedTheme = localStorage.getItem("theme");
+
+  if (savedTheme === "dark") {
+    body.classList.add("dark");
+  } else {
+    body.classList.add("light");
+  }
+
+  btn.addEventListener("click", () => {
+    if (body.classList.contains("light")) {
+      body.classList.replace("light", "dark");
+      localStorage.setItem("theme", "dark");
+    } else {
+      body.classList.replace("dark", "light");
+      localStorage.setItem("theme", "light");
+    }
+  });
+
+  const progressBars = document.querySelectorAll(".progress");
+  const animateBars = () => {
+    progressBars.forEach(bar => {
+      const value = bar.getAttribute("data-progress");
+      bar.style.width = value + "%";
+    });
+  };
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        animateBars();
+        observer.disconnect();
+      }
+    });
+  });
+  observer.observe(document.querySelector("#skills"));
+
+  
+  const form = document.getElementById("contactForm");
+  const messageBox = document.getElementById("messageBox");
+
+  form.addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const message = document.getElementById("message").value.trim();
+
+    if (name === "" || email === "" || message === "") {
+      messageBox.innerHTML = "<p class='error'>All fields are required!</p>";
+      return;
+    }
+
+    const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+    if (!email.match(emailPattern)) {
+      messageBox.innerHTML = "<p class='error'>Please enter a valid email address.</p>";
+      return;
+    }
+
+ 
+    localStorage.setItem("contactName", name);
+    localStorage.setItem("contactEmail", email);
+    localStorage.setItem("contactMessage", message);
+
+    messageBox.innerHTML = "<p class='success'>Form submitted successfully! Redirecting...</p>";
+
+    setTimeout(() => {
+      window.location.href = "form-details.html";
+    }, 1500);
+  });
+
+  // Make project cards clickable
+const projectCards = document.querySelectorAll(".project");
+
+projectCards.forEach(card => {
+  card.style.cursor = "pointer";
+  card.addEventListener("click", () => {
+    const link = card.getAttribute("data-link");
+    if (link) {
+      window.location.href = link;
+    }
+  });
+});
+
+</script>
 </body>
 </html>

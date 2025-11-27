@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Form Details</title>
+  <style>
+    body{
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    .box{
+      background: #f2f2f2;
+      padding: 15px;
+      border-radius: 5px;
+      width: 300px;
+    }
+  </style>
+</head>
+<body>
+
+<h2>Submitted Details</h2>
+
+<div class="box">
+  <p><strong>Name:</strong> <span id="showName"></span></p>
+  <p><strong>Email:</strong> <span id="showEmail"></span></p>
+  <p><strong>Message:</strong> <span id="showMessage"></span></p>
+</div>
+
+<script>
+  // Get data from localStorage
+  document.getElementById("showName").textContent = localStorage.getItem("contactName");
+  document.getElementById("showEmail").textContent = localStorage.getItem("contactEmail");
+  document.getElementById("showMessage").textContent = localStorage.getItem("contactMessage");
+</script>
+
+</body>
+</html>
